@@ -1,0 +1,1 @@
+GITHUB_USER_REPOS_URL = 'https://api.github.com/users/{login}/repos'
