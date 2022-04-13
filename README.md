@@ -67,3 +67,27 @@
 ## Запуск
 
 Используйте `uvicorn src.api:app --host 0.0.0.0 --port 5000` для запуска API. Подробнее в документации [FastAPI](https://fastapi.tiangolo.com/deployment/manually/) или [Uvicorn](https://www.uvicorn.org/).
+
+
+## Запуск с помощью docker-compose
+
+### Пример файла .env:
+```
+DB_HOST=db
+DB_PORT=5432
+DB_DATABASE=postgres
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+```
+### Пример файла .env.db
+```
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=postgres
+```
+###После создания файлов запустите
+```
+docker-compose up -d
+docker-compose exec web alembic upgrade head
+```
+Перейдите на http://localhost/docs
