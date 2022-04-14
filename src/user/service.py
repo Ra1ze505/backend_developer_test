@@ -41,9 +41,13 @@ class UserService:
             connection.execute(query)
             connection.commit()
 
-    def get_user_stats_by_id(self, id: int) -> StatUserResponseV1:
+    def get_user_stats_by_id(self, id: int, date_from: str, date_to: str) -> StatUserResponseV1:
         user_query = select(tables.users).where(tables.users.c.id == id)
         stats_query = select(tables.stats).where(tables.stats.c.user_id == id)
+        if date_from:
+            stats_query = stats_query.where(tables.stats.c.date >= date_from)
+        if date_to:
+            stats_query = stats_query.where(tables.stats.c.date <= date_to)
         with self._engine.connect() as connection:
             user_data = connection.execute(user_query).fetchone()
             stats_data = connection.execute(stats_query).fetchall()

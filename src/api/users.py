@@ -50,5 +50,7 @@ def delete_user(id: int = Path(..., ge=1), user_service: UserServiceProtocol = D
     summary="Список репозиториев пользователя",
     description="Возвращает список репозиториев пользователя.",
 )
-def get_user_repos(id: int = Path(..., ge=1), user_service: UserServiceProtocol = Depends()):
-    return user_service.get_user_stats_by_id(id)
+def get_user_repos(
+    id: int = Path(..., ge=1), user_service: UserServiceProtocol = Depends(), date_from: str = None, date_to: str = None
+):
+    return user_service.get_user_stats_by_id(id, date_from, date_to)
